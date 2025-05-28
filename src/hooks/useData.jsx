@@ -10,12 +10,17 @@ export default function useData(url) {
 
     async function fetchData() {
         try {
+            setLoading(true)
             const response = await axios.get(url)
-            setData(response.data)
+            setTimeout(() => {
+                setData(response.data)
+                setLoading(false) 
+            }, 3000)
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            setError(error.message)
         } finally {
-
+           setLoading(false)  
         }
     }
 
