@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink
 
 export default function useData(url) {
     const [data, setData] = useState(null);
@@ -11,12 +11,17 @@ export default function useData(url) {
     async function fetchData() {
         try {
             const response = await axios.get(url)
+            console.log(response.data)
         } catch (error) {
             console.log(error)
         } finally {
 
         }
     }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return {
         data,
